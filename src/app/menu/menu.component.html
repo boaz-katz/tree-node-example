@@ -1,0 +1,17 @@
+<tree-root [nodes]="nodes" [options]="options" #tree (select)="selectedNode($event)"
+    (deselect)="selectedNode($event)">
+    <ng-template #treeNodeWrapperTemplate let-node let-index="index">
+        <div>
+            <tree-node-expander [node]="node"></tree-node-expander>
+            <div class="node-content-wrapper" (click)="node.mouseAction('click', $event)"
+                (dblclick)="node.mouseAction('dblClick', $event)"
+                (contextmenu)="node.mouseAction('contextMenu', $event)" (treeDrop)="node.onDrop($event)"
+                [treeAllowDrop]="node.allowDrop" [treeDrag]="node" [treeDragEnabled]="node.allowDrag()">
+                <div #elementRef>isSelected : {{node.isSelected}}</div>
+                <div>isAllSelected : {{node.isAllSelected}}</div>
+                <button (click)="selectNode(node)">toggle select</button>
+                <span (click)="toggleNode(node)">{{ node.data.name }}</span>
+            </div>
+        </div>
+    </ng-template>
+</tree-root>
